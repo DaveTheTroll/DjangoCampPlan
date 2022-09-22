@@ -1,6 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
-from django.http import Http404
 from tents.models import *
 
 def index(request):
@@ -11,8 +10,5 @@ def nations(request):
     return render(request, "tents/nations.html", {"nation_list": nation_list})
 
 def nation(request, id):
-    try:
-        nation = Nation.objects.get(id=id)
-    except:
-        raise Http404("Nation does not exist")
+    nation = get_object_or_404(Nation, id=id)
     return render(request, "tents/nation.html", {"nation": nation})
