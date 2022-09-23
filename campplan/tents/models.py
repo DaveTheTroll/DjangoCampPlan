@@ -32,6 +32,7 @@ class Tent(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     name = models.CharField(max_length=128, null=True, blank=True)
     group = models.ForeignKey(FieldGroup, on_delete=models.CASCADE, null=True)
+    type = models.ForeignKey(TentType, on_delete=models.CASCADE, null=False)
 
     sleeping_only = models.BooleanField(default=False)
     group_tent = models.BooleanField(default=False)

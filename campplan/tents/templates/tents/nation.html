@@ -3,7 +3,7 @@
     {% for fg in nation.fieldgroup_set.all %}
         <h2>{{ fg.name }}</h2>
         {% for tent in fg.tent_set.all %}
-            {{ tent.owner }}
+            {{ tent.owner }} - {{tent.name}} - {{ tent.type.name }}
         {% endfor %}
     {% endfor %}
     </ul>
