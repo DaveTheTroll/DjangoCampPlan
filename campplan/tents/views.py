@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from tents.models import *
 
 def index(request):
-    return HttpResponse("Hello camper.")
+    return render(request, "tents/index.html")
 
 def nations(request):
     nation_list = Nation.objects.order_by("id")

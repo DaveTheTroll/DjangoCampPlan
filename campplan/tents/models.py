@@ -30,15 +30,16 @@ class Event(models.Model):
 
 class Tent(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
-    name = models.CharField(max_length=128, null=True)
+    name = models.CharField(max_length=128, null=True, blank=True)
+    group = models.ForeignKey(FieldGroup, on_delete=models.CASCADE, null=True)
 
     sleeping_only = models.BooleanField(default=False)
     group_tent = models.BooleanField(default=False)
-    colour = models.CharField(max_length=64, null=True)
+    colour = models.CharField(max_length=64, null=True, blank=True)
     occupants = models.IntegerField()
     pd_supplied = models.BooleanField(default=False)
     electric_req = models.BooleanField(default=False)
-    notes = models.TextField()
+    notes = models.TextField(null=True, blank=True)
 
     class TentOnField(models.TextChoices):
         IC_ESSENTIAL = "IC", _("IC Essential")
@@ -57,7 +58,7 @@ class Tent(models.Model):
         FRIDAY_EVE = "FD", _("Friday after 5pm")
 
     def __str__(self):
-        return self.owner if self.name is None else "%s : %s"%(self.owner, self.name)
+        return str(self.owner) if self.name is None else "%s : %s"%(self.owner, self.name)
 
 class TentAtEvent(models.Model):
     tent = models.ForeignKey(Tent, on_delete=models.CASCADE, null=False)

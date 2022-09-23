@@ -1,1 +1,9 @@
 <h1>{{nation.name}}</h1>
+<ul>
+    {% for fg in nation.fieldgroup_set.all %}
+        <h2>{{ fg.name }}</h2>
+        {% for tent in fg.tent_set.all %}
+            {{ tent.owner }}
+        {% endfor %}
+    {% endfor %}
+    </ul>
